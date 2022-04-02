@@ -2,8 +2,14 @@ import config
 
 from github import Github
 import csv
+from os import environ
 
-g = Github(login_or_token=config.access_token, per_page=100)
+if environ['ACCESS_TOKEN'] is not None:
+    token = environ["ACCESS_TOKEN"]
+else:
+    token = config.access_token
+
+g = Github(login_or_token=token, per_page=100)
 
 
 def getCodeSize(sha):
