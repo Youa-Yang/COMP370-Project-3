@@ -19,13 +19,13 @@ def getCodeSize(sha):
 
 
 total_commits = g.get_repo("ninja-build/ninja").get_commits().totalCount
+current_commits = sum(1 for row in open('code_sizes.csv'))
 
-with open('code_sizes.csv', 'w') as file:
+with open('code_sizes.csv', 'a+', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["Sha", "Code Size"])
     progress = 0
-    for commit in g.get_repo("ninja-build/ninja").get_commits():
+    for commit in g.get_repo("ninja-build/ninja").get_commits()[current_commits:current_commits+100]:
         progress += 1
-        print(str(progress), "/", str(total_commits), " ",
-              [commit.commit.sha, getCodeSize(commit.commit.sha)])
-        writer.writerow([commit.commit.sha, getCodeSize(commit.commit.sha)])
+        print(str(progress), "/ 100", [commit.commit.committer.date, commit.commit.tree.sha, getCodeSize(commit.commit.tree.sha)])
+        writer.writerow(
+            [commit.commit.committer.date, commit.commit.tree.sha, getCodeSize(commit.commit.tree.sha)])
