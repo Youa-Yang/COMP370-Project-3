@@ -29,3 +29,5 @@ with open('code_sizes.csv', 'a+', newline='') as file:
               commit.commit.tree.sha, getCodeSize(commit.commit.tree.sha)])
         writer.writerow(
             [commit.commit.committer.date, commit.commit.tree.sha, getCodeSize(commit.commit.tree.sha)])
+
+print(g.get_rate_limit())
