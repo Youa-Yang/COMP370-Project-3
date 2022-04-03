@@ -23,7 +23,7 @@ current_commits = sum(1 for row in open('code_sizes.csv'))
 with open('code_sizes.csv', 'a+', newline='') as file:
     writer = csv.writer(file)
     progress = 0
-    for commit in g.get_repo("ninja-build/ninja").get_commits()[current_commits:current_commits+100]:
+    for commit in g.get_repo("ninja-build/ninja").get_commits()[current_commits:current_commits+200]:
         progress += 1
         print(str(progress), "/ 100", [commit.commit.committer.date,
               commit.commit.tree.sha, getCodeSize(commit.commit.tree.sha)])
