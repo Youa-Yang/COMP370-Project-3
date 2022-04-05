@@ -140,8 +140,9 @@ issues_converted.hist(column='Created at', by='State', bins=12, sharey=True)
 plt.show()
 
 
-# In[ ]:
-
-
+# In[23]
+#Plotting counts of State (closed (0) or open (1)) against # of Labels
+issues_converted.hist(column='# of Labels', by='State', sharey=True, sharex=True)
+plt.show()
 
 
